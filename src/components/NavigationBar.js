@@ -19,8 +19,8 @@ const NavigationBar = () => {
 						display={{ base: "none", md: "block" }}
 						w={768}
 						px={6}
-						h="100vh"
 						bg="#6ECCAF"
+						h="100vh"
 					>
 						<NavigationLinks />
 					</Box>

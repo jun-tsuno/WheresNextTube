@@ -1,27 +1,23 @@
 import React, { useState } from "react";
 import Searchbar from "../components/Searchbar";
-import { useGetVideoListsQuery } from "../store";
+import VideoListPage from "./VideoListPage";
 
 const HomePage = () => {
 	const [searchTerm, setSearchTerm] = useState("travel");
-	const { data, isError, isFetching } = useGetVideoListsQuery(searchTerm);
 
 	const onTermSubmit = (term) => {
 		setSearchTerm(term);
 	};
 
-	if (isError) {
-		console.log("error");
-	} else if (isFetching) {
-		console.log("fetching");
-	} else {
-		console.log(data.items);
-	}
-
 	return (
-		<div>
-			<Searchbar onTermSubmit={onTermSubmit} />
-		</div>
+		<>
+			<div className="mt-8">
+				<Searchbar onTermSubmit={onTermSubmit} />
+			</div>
+			<div className="my-10">
+				<VideoListPage searchTerm={searchTerm} />
+			</div>
+		</>
 	);
 };
 

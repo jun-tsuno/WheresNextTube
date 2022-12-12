@@ -2,6 +2,10 @@ import React from "react";
 import { Link, Stack, Heading } from "@chakra-ui/react";
 import { NavLink as RouterLink } from "react-router-dom";
 
+const activeStyle = {
+	color: "#e76f51",
+};
+
 const HoverLink = (props) => (
 	<Link
 		as={RouterLink}
@@ -19,9 +23,24 @@ const NavigationLinks = () => {
 				TravelTUBE
 			</Heading>
 			<Stack as="b" color="white" fontSize="lg">
-				<HoverLink to="/">Home</HoverLink>
-				<HoverLink to="/howtouse">How to Use</HoverLink>
-				<HoverLink to="/favlist">Favorite List</HoverLink>
+				<HoverLink
+					to="/"
+					style={({ isActive }) => (isActive ? activeStyle : undefined)}
+				>
+					Home
+				</HoverLink>
+				<HoverLink
+					to="/howtouse"
+					style={({ isActive }) => (isActive ? activeStyle : undefined)}
+				>
+					How to Use
+				</HoverLink>
+				<HoverLink
+					to="/favlist"
+					style={({ isActive }) => (isActive ? activeStyle : undefined)}
+				>
+					Favorite List
+				</HoverLink>
 			</Stack>
 		</>
 	);
