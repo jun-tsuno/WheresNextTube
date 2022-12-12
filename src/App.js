@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SharedLayout from "./pages/SharedLayout";
+import HomePage from "./pages/HomePage";
+import About from "./pages/About";
+import FavList from "./pages/FavList";
+import Error from "./pages/Error";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+	return (
+		<>
+			<BrowserRouter>
+				<Routes>
+					<Route path="/" element={<SharedLayout />}>
+						<Route index element={<HomePage />} />
+						<Route path="howtouse" element={<About />} />
+						<Route path="favlist" element={<FavList />} />
+						<Route path="*" element={<Error />} />
+					</Route>
+				</Routes>
+			</BrowserRouter>
+		</>
+	);
+};
 
 export default App;
