@@ -20,6 +20,7 @@ const videosSlice = createSlice({
 				text: action.payload.text,
 				pic: action.payload.pic,
 				title: action.payload.title,
+				fav: action.payload.fav,
 			};
 		},
 		addFavList(state, action) {
@@ -28,6 +29,7 @@ const videosSlice = createSlice({
 				text: action.payload.text,
 				pic: action.payload.pic,
 				title: action.payload.title,
+				fav: action.payload.fav,
 			});
 		},
 	},

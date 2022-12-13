@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import VideoCard from "../components/VideoCard";
 import ModalPage from "./ModalPage";
-import { selectVideo, useGetVideoListsQuery } from "../store";
-import { useDispatch } from "react-redux";
+import { selectVideo, addFavList, useGetVideoListsQuery } from "../store";
+import { useSelector, useDispatch } from "react-redux";
 
 const VideoListPage = ({ searchTerm }) => {
 	const { data, isError, isFetching } = useGetVideoListsQuery(searchTerm);
 	const [isOpen, setIsOpen] = useState(false);
 	const dispatch = useDispatch();
+
+	const favList = useSelector((state) => {
+		return state.videos.favList;
+	});
 
 	const handleOpenModal = () => {
 		setIsOpen(true);
@@ -19,6 +23,19 @@ const VideoListPage = ({ searchTerm }) => {
 
 	const handleSelect = (selectedItem) => {
 		dispatch(selectVideo(selectedItem));
+	};
+
+	const handleAddFav = (videoInfo) => {
+		if (favList.length === 0) {
+			return dispatch(addFavList(videoInfo));
+		} else {
+			for (let i = 0; i < favList.length; i++) {
+				if (favList[i].id === videoInfo.id) {
+					return;
+				}
+			}
+			return dispatch(addFavList(videoInfo));
+		}
 	};
 
 	let showContent;
@@ -39,6 +56,7 @@ const VideoListPage = ({ searchTerm }) => {
 					className="m-5"
 					handleOpenModal={handleOpenModal}
 					handleSelect={handleSelect}
+					handleAddFav={handleAddFav}
 				/>
 			);
 		});

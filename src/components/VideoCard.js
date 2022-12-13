@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
 	Card,
 	CardBody,
@@ -9,8 +9,6 @@ import {
 	CardFooter,
 } from "@chakra-ui/react";
 import AddListButton from "./AddListButton";
-import { useDispatch, useSelector } from "react-redux";
-import { addFavList } from "../store";
 
 const VideoCard = ({
 	id,
@@ -20,34 +18,14 @@ const VideoCard = ({
 	className,
 	handleOpenModal,
 	handleSelect,
+	handleAddFav,
 }) => {
-	const favList = useSelector((state) => {
-		return state.videos.favList;
-	});
-
-	const dispatch = useDispatch();
 	const videoInfo = {
 		id,
 		text,
 		pic,
 		title,
-	};
-
-	const handleAddFav = () => {
-		if (favList.length === 0) {
-			console.log("first");
-			return dispatch(addFavList(videoInfo));
-		} else {
-			for (let i = 0; i < favList.length; i++) {
-				if (favList[i].id === id) {
-					console.log("second");
-					return;
-				}
-				console.log("third");
-
-				return dispatch(addFavList(videoInfo));
-			}
-		}
+		fav: false,
 	};
 
 	return (
@@ -71,7 +49,9 @@ const VideoCard = ({
 					</Stack>
 				</CardBody>
 				<CardFooter ml="auto">
-					<AddListButton onClick={handleAddFav} />
+					<AddListButton
+						onClick={() => handleAddFav({ ...videoInfo, fav: true })}
+					/>
 				</CardFooter>
 			</Card>
 		</>
