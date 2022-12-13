@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import VideoCard from "../components/VideoCard";
-import { useGetVideoListsQuery } from "../store";
+import ModalPage from "./ModalPage";
+import { selectVideo, useGetVideoListsQuery } from "../store";
+import { useDispatch } from "react-redux";
 
 const VideoListPage = ({ searchTerm }) => {
 	const { data, isError, isFetching } = useGetVideoListsQuery(searchTerm);
-	console.log(data.items);
+	const [isOpen, setIsOpen] = useState(false);
+	const dispatch = useDispatch();
+
+	const handleOpenModal = () => {
+		setIsOpen(true);
+	};
+
+	const handleCloseModal = () => {
+		setIsOpen(false);
+	};
+
+	const handleSelect = (selectedItem) => {
+		dispatch(selectVideo(selectedItem));
+	};
 
 	let showContent;
 	if (isError) {
@@ -12,6 +27,7 @@ const VideoListPage = ({ searchTerm }) => {
 	} else if (isFetching) {
 		console.log("fetching");
 	} else {
+		if (!data) return;
 		showContent = data.items.map((item) => {
 			return (
 				<VideoCard
@@ -21,12 +37,25 @@ const VideoListPage = ({ searchTerm }) => {
 					pic={item.snippet.thumbnails.medium.url}
 					title={item.snippet.title}
 					className="m-5"
+					handleOpenModal={handleOpenModal}
+					handleSelect={handleSelect}
 				/>
 			);
 		});
 	}
 
-	return <div className="flex flex-wrap justify-center">{showContent}</div>;
+	const modal = (
+		<ModalPage handleCloseModal={handleCloseModal} isOpen={isOpen} />
+	);
+
+	return (
+		<>
+			<div className="flex flex-wrap justify-center">
+				{showContent}
+				{isOpen && modal}
+			</div>
+		</>
+	);
 };
 
 export default VideoListPage;

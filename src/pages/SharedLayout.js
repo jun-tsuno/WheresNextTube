@@ -8,7 +8,7 @@ const SharedLayout = () => {
 				<div className="max-w-[210px] fixed">
 					<NavigationBar />
 				</div>
-				<div className="w-full ml-[210px]">
+				<div className="w-full mt-12 md:ml-[210px] md:mt-2">
 					<Outlet />
 				</div>
 			</div>

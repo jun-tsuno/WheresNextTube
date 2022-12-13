@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { videoSearchApi } from "./apis/videoSearch";
+import { videosReducer, selectVideo, addFavList } from "./slices/videosSlice";
 
 const store = configureStore({
 	reducer: {
+		videos: videosReducer,
 		[videoSearchApi.reducerPath]: videoSearchApi.reducer,
 	},
 	middleware: (getDefaultMiddleware) => {
@@ -13,6 +15,6 @@ const store = configureStore({
 
 setupListeners(store.dispatch);
 
-export { store };
+export { store, selectVideo, addFavList };
 
 export { useGetVideoListsQuery } from "./apis/videoSearch";
