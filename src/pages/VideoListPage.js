@@ -1,8 +1,13 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import VideoCard from "../components/VideoCard";
 import ModalPage from "./ModalPage";
-import { selectVideo, addFavList, useGetVideoListsQuery } from "../store";
-import { useSelector, useDispatch } from "react-redux";
+import {
+	selectVideo,
+	addFavList,
+	removeFavList,
+	useGetVideoListsQuery,
+} from "../store";
 
 const VideoListPage = ({ searchTerm }) => {
 	const { data, isError, isFetching } = useGetVideoListsQuery(searchTerm);
@@ -12,6 +17,7 @@ const VideoListPage = ({ searchTerm }) => {
 	const favList = useSelector((state) => {
 		return state.videos.favList;
 	});
+	const favId = favList.map((e) => e.id);
 
 	const handleOpenModal = () => {
 		setIsOpen(true);
@@ -25,17 +31,10 @@ const VideoListPage = ({ searchTerm }) => {
 		dispatch(selectVideo(selectedItem));
 	};
 
-	const handleAddFav = (videoInfo) => {
-		if (favList.length === 0) {
-			return dispatch(addFavList(videoInfo));
-		} else {
-			for (let i = 0; i < favList.length; i++) {
-				if (favList[i].id === videoInfo.id) {
-					return;
-				}
-			}
-			return dispatch(addFavList(videoInfo));
-		}
+	const handleFav = (videoInfo) => {
+		!favId.includes(videoInfo.id)
+			? dispatch(addFavList(videoInfo))
+			: dispatch(removeFavList(videoInfo.id));
 	};
 
 	let showContent;
@@ -46,6 +45,9 @@ const VideoListPage = ({ searchTerm }) => {
 	} else {
 		if (!data) return;
 		showContent = data.items.map((item) => {
+			if (favId.includes(item.id.videoId)) {
+			}
+
 			return (
 				<VideoCard
 					key={item.id.videoId}
@@ -56,14 +58,20 @@ const VideoListPage = ({ searchTerm }) => {
 					className="m-5"
 					handleOpenModal={handleOpenModal}
 					handleSelect={handleSelect}
-					handleAddFav={handleAddFav}
+					handleFav={handleFav}
+					favId={favId}
 				/>
 			);
 		});
 	}
 
 	const modal = (
-		<ModalPage handleCloseModal={handleCloseModal} isOpen={isOpen} />
+		<ModalPage
+			handleCloseModal={handleCloseModal}
+			isOpen={isOpen}
+			handleFav={handleFav}
+			favId={favId}
+		/>
 	);
 
 	return (

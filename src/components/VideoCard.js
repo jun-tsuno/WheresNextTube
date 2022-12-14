@@ -1,4 +1,6 @@
 import React from "react";
+import AddListButton from "./AddListButton";
+import getButtonIcon from "../helpers/getButtonIcon";
 import {
 	Card,
 	CardBody,
@@ -8,7 +10,6 @@ import {
 	Text,
 	CardFooter,
 } from "@chakra-ui/react";
-import AddListButton from "./AddListButton";
 
 const VideoCard = ({
 	id,
@@ -18,14 +19,14 @@ const VideoCard = ({
 	className,
 	handleOpenModal,
 	handleSelect,
-	handleAddFav,
+	handleFav,
+	favId,
 }) => {
 	const videoInfo = {
 		id,
 		text,
 		pic,
 		title,
-		fav: false,
 	};
 
 	return (
@@ -50,7 +51,8 @@ const VideoCard = ({
 				</CardBody>
 				<CardFooter ml="auto">
 					<AddListButton
-						onClick={() => handleAddFav({ ...videoInfo, fav: true })}
+						onClick={() => handleFav({ ...videoInfo, fav: true })}
+						buttonIcon={getButtonIcon(favId, id)}
 					/>
 				</CardFooter>
 			</Card>

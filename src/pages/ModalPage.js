@@ -1,13 +1,21 @@
 import React from "react";
-import VideoModal from "../components/VideoModal";
 import { useSelector } from "react-redux";
-import { ModalBody, ModalFooter, ModalHeader } from "@chakra-ui/react";
+import VideoModal from "../components/VideoModal";
 import AddListButton from "../components/AddListButton";
+import getButtonIcon from "../helpers/getButtonIcon";
+import { ModalBody, ModalFooter, ModalHeader } from "@chakra-ui/react";
 
-const ModalPage = ({ handleCloseModal, isOpen }) => {
-	const { id, text, title } = useSelector((state) => {
+const ModalPage = ({ handleCloseModal, isOpen, handleFav, favId }) => {
+	const { id, text, title, pic } = useSelector((state) => {
 		return state.videos.selectedVideo;
 	});
+
+	const videoInfo = {
+		id,
+		text,
+		title,
+		pic,
+	};
 
 	const videoUrl = `https://www.youtube.com/embed/${id}`;
 
@@ -18,7 +26,6 @@ const ModalPage = ({ handleCloseModal, isOpen }) => {
 				<iframe
 					src={videoUrl}
 					title="YouTube video player"
-					frameBorder="0"
 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 					allowFullScreen
 					style={{ width: "100%", aspectRatio: 16 / 9 }}
@@ -26,7 +33,10 @@ const ModalPage = ({ handleCloseModal, isOpen }) => {
 				<p className="mt-8">{text}</p>
 			</ModalBody>
 			<ModalFooter>
-				<AddListButton />
+				<AddListButton
+					buttonIcon={getButtonIcon(favId, id)}
+					onClick={() => handleFav(videoInfo)}
+				/>
 			</ModalFooter>
 		</>
 	);

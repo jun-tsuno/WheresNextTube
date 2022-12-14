@@ -20,7 +20,6 @@ const videosSlice = createSlice({
 				text: action.payload.text,
 				pic: action.payload.pic,
 				title: action.payload.title,
-				fav: action.payload.fav,
 			};
 		},
 		addFavList(state, action) {
@@ -29,11 +28,15 @@ const videosSlice = createSlice({
 				text: action.payload.text,
 				pic: action.payload.pic,
 				title: action.payload.title,
-				fav: action.payload.fav,
 			});
+		},
+		removeFavList(state, action) {
+			state.favList = state.favList.filter(
+				(item) => item.id !== action.payload
+			);
 		},
 	},
 });
 
-export const { selectVideo, addFavList } = videosSlice.actions;
+export const { selectVideo, addFavList, removeFavList } = videosSlice.actions;
 export const videosReducer = videosSlice.reducer;
