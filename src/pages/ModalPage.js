@@ -3,12 +3,14 @@ import { useSelector } from "react-redux";
 import VideoModal from "../components/VideoModal";
 import AddListButton from "../components/AddListButton";
 import getButtonIcon from "../helpers/getButtonIcon";
+import useFav from "../hooks/useFav";
 import { ModalBody, ModalFooter, ModalHeader } from "@chakra-ui/react";
 
-const ModalPage = ({ handleCloseModal, isOpen, handleFav, favId }) => {
+const ModalPage = ({ handleCloseModal, isOpen }) => {
 	const { id, text, title, pic } = useSelector((state) => {
 		return state.videos.selectedVideo;
 	});
+	const { favId, handleFav } = useFav();
 
 	const videoInfo = {
 		id,

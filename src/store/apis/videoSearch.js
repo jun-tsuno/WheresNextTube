@@ -11,7 +11,7 @@ const videoSearchApi = createApi({
 				query: (searchTerm) => {
 					return {
 						method: "GET",
-						url: `?part=snippet&type=video&maxResults=10&order=rating&key=${process.env.REACT_APP_API_KEY}&q=${searchTerm}`,
+						url: `?part=snippet&type=video&maxResults=15&order=relevance&key=${process.env.REACT_APP_API_KEY}&q=${searchTerm}`,
 					};
 				},
 			}),

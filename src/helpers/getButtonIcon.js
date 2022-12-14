@@ -11,7 +11,6 @@ const getButtonIcon = (favId, id) => {
 	} else {
 		return (
 			<>
-				{" "}
 				<BiMessageAdd className="text-3xl " />
 			</>
 		);

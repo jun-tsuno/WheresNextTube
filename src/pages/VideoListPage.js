@@ -1,53 +1,23 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
 import VideoCard from "../components/VideoCard";
 import ModalPage from "./ModalPage";
-import {
-	selectVideo,
-	addFavList,
-	removeFavList,
-	useGetVideoListsQuery,
-} from "../store";
+import Spinner from "../components/Spinner";
+import Error from "./Error";
+import useModal from "../hooks/useModal";
+import { useGetVideoListsQuery } from "../store";
 
 const VideoListPage = ({ searchTerm }) => {
 	const { data, isError, isFetching } = useGetVideoListsQuery(searchTerm);
-	const [isOpen, setIsOpen] = useState(false);
-	const dispatch = useDispatch();
-
-	const favList = useSelector((state) => {
-		return state.videos.favList;
-	});
-	const favId = favList.map((e) => e.id);
-
-	const handleOpenModal = () => {
-		setIsOpen(true);
-	};
-
-	const handleCloseModal = () => {
-		setIsOpen(false);
-	};
-
-	const handleSelect = (selectedItem) => {
-		dispatch(selectVideo(selectedItem));
-	};
-
-	const handleFav = (videoInfo) => {
-		!favId.includes(videoInfo.id)
-			? dispatch(addFavList(videoInfo))
-			: dispatch(removeFavList(videoInfo.id));
-	};
+	const { isOpen, handleOpenModal, handleCloseModal } = useModal();
 
 	let showContent;
 	if (isError) {
-		console.log("error");
+		showContent = <Error />;
 	} else if (isFetching) {
-		console.log("fetching");
+		showContent = <Spinner />;
 	} else {
 		if (!data) return;
 		showContent = data.items.map((item) => {
-			if (favId.includes(item.id.videoId)) {
-			}
-
 			return (
 				<VideoCard
 					key={item.id.videoId}
@@ -57,21 +27,13 @@ const VideoListPage = ({ searchTerm }) => {
 					title={item.snippet.title}
 					className="m-5"
 					handleOpenModal={handleOpenModal}
-					handleSelect={handleSelect}
-					handleFav={handleFav}
-					favId={favId}
 				/>
 			);
 		});
 	}
 
 	const modal = (
-		<ModalPage
-			handleCloseModal={handleCloseModal}
-			isOpen={isOpen}
-			handleFav={handleFav}
-			favId={favId}
-		/>
+		<ModalPage handleCloseModal={handleCloseModal} isOpen={isOpen} />
 	);
 
 	return (

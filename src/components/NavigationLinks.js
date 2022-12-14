@@ -19,10 +19,10 @@ const HoverLink = (props) => (
 const NavigationLinks = () => {
 	return (
 		<>
-			<Heading size="lg" my={5} color="#005377">
+			<Heading size="lg" my={5} color="#005377" textAlign="center">
 				TravelTUBE
 			</Heading>
-			<Stack as="b" color="white" fontSize="lg">
+			<Stack as="b" color="white" fontSize="lg" textAlign="center">
 				<HoverLink
 					to="/"
 					style={({ isActive }) => (isActive ? activeStyle : undefined)}

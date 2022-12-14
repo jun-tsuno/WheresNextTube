@@ -1,6 +1,8 @@
 import React from "react";
 import AddListButton from "./AddListButton";
 import getButtonIcon from "../helpers/getButtonIcon";
+import useFav from "../hooks/useFav";
+import useVideoSelect from "../hooks/useVideoSelect";
 import {
 	Card,
 	CardBody,
@@ -11,17 +13,9 @@ import {
 	CardFooter,
 } from "@chakra-ui/react";
 
-const VideoCard = ({
-	id,
-	text,
-	pic,
-	title,
-	className,
-	handleOpenModal,
-	handleSelect,
-	handleFav,
-	favId,
-}) => {
+const VideoCard = ({ id, text, pic, title, className, handleOpenModal }) => {
+	const { favId, handleFav } = useFav();
+	const handleSelect = useVideoSelect();
 	const videoInfo = {
 		id,
 		text,

@@ -3,10 +3,11 @@ import Searchbar from "../components/Searchbar";
 import VideoListPage from "./VideoListPage";
 
 const HomePage = () => {
-	const [searchTerm, setSearchTerm] = useState("travel");
+	const [userInput, setUserInput] = useState("");
+	const searchTerm = `travel place ${userInput}`;
 
 	const onTermSubmit = (term) => {
-		setSearchTerm(term);
+		setUserInput(term);
 	};
 
 	return (
