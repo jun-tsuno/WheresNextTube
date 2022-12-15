@@ -15,9 +15,12 @@ const Searchbar = ({ onTermSubmit }) => {
 
 	return (
 		<div>
-			<form onSubmit={handleSubmit} className="text-center w-full">
+			<form
+				onSubmit={handleSubmit}
+				className="w-full h-32 md:h-24 pb-4 items-end fixed flex justify-center z-10 bg-[#f4f1de]"
+			>
 				<input
-					className="w-3/4 max-w-md h-11 p-3 border-2 border-gray-400 rounded-md"
+					className="w-3/4 max-w-md h-11 p-3 border-2 border-gray-400 rounded-md md:-translate-x-1/4"
 					type="text"
 					value={value}
 					placeholder="Search Videos..."

@@ -25,7 +25,7 @@ const VideoCard = ({ id, text, pic, title, className, handleOpenModal }) => {
 
 	return (
 		<>
-			<Card w="300px" className={className}>
+			<Card w="300px" bg="white" className={className}>
 				<CardBody>
 					<Image
 						src={pic}
@@ -45,7 +45,7 @@ const VideoCard = ({ id, text, pic, title, className, handleOpenModal }) => {
 				</CardBody>
 				<CardFooter ml="auto">
 					<AddListButton
-						onClick={() => handleFav({ ...videoInfo, fav: true })}
+						onClick={() => handleFav(videoInfo)}
 						buttonIcon={getButtonIcon(favId, id)}
 					/>
 				</CardFooter>

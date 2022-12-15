@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, Stack, Heading } from "@chakra-ui/react";
 import { NavLink as RouterLink } from "react-router-dom";
+import { MdTravelExplore } from "react-icons/md";
 
 const activeStyle = {
 	color: "#e76f51",
@@ -19,8 +20,13 @@ const HoverLink = (props) => (
 const NavigationLinks = () => {
 	return (
 		<>
-			<Heading size="lg" my={5} color="#005377" textAlign="center">
-				TravelTUBE
+			<Heading size="xl" mt={10} mb={5} color="#005377" textAlign="center">
+				<div className="font-logoTitle">
+					Where'sNEXT?
+					<br />
+					TUBE
+					<MdTravelExplore className="inline" />
+				</div>
 			</Heading>
 			<Stack as="b" color="white" fontSize="lg" textAlign="center">
 				<HoverLink

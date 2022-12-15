@@ -12,10 +12,10 @@ const HomePage = () => {
 
 	return (
 		<>
-			<div className="mt-8">
+			<div>
 				<Searchbar onTermSubmit={onTermSubmit} />
 			</div>
-			<div className="my-10">
+			<div className="my-28">
 				<VideoListPage searchTerm={searchTerm} />
 			</div>
 		</>

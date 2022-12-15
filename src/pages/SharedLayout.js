@@ -5,10 +5,10 @@ const SharedLayout = () => {
 	return (
 		<>
 			<div className="flex">
-				<div className="max-w-[210px] fixed">
+				<div className="max-w-[210px] fixed z-20">
 					<NavigationBar />
 				</div>
-				<div className="w-full mt-12 md:ml-[210px] md:mt-2">
+				<div className="w-full  md:ml-[210px] ">
 					<Outlet />
 				</div>
 			</div>
