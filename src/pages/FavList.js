@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import VideoCard from "../components/VideoCard";
 import ModalPage from "./ModalPage";
 import useModal from "../hooks/useModal";
-import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
+import { Card, CardBody } from "@chakra-ui/react";
 import { RiVideoLine } from "react-icons/ri";
 
 const FavList = () => {
