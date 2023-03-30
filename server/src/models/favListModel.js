@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const favListSchema = new Schema(
 	{
-		videId: {
+		videoId: {
 			type: String,
 			required: true,
 		},

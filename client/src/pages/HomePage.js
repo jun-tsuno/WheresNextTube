@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import Searchbar from "../components/Searchbar";
-import VideoListPage from "./VideoListPage";
+import React, { useState } from 'react';
+import Searchbar from '../components/Searchbar';
+import VideoListPage from './VideoListPage';
 
 const HomePage = () => {
-	const [userInput, setUserInput] = useState("");
+	const [userInput, setUserInput] = useState('');
 
 	const searchTerm = `travel place ${userInput}`;
 
@@ -16,7 +16,7 @@ const HomePage = () => {
 			<div>
 				<Searchbar onTermSubmit={onTermSubmit} />
 			</div>
-			<div className="my-28">
+			<div className='my-28'>
 				<VideoListPage searchTerm={searchTerm} />
 			</div>
 		</>
