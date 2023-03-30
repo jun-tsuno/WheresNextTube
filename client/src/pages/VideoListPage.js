@@ -6,7 +6,7 @@ import Error from "./Error";
 import useModal from "../hooks/useModal";
 import { useGetVideoListsQuery } from "../store";
 
-const VideoListPage = ({ searchTerm }) => {
+const VideoListPage = ({ searchTerm, setSearchTerm }) => {
 	const { data, isError, isFetching } = useGetVideoListsQuery(searchTerm);
 	const { isOpen, handleOpenModal, handleCloseModal } = useModal();
 
@@ -17,14 +17,14 @@ const VideoListPage = ({ searchTerm }) => {
 		showContent = <Spinner />;
 	} else {
 		if (!data) return;
-		showContent = data.items.map((item) => {
+		showContent = data.items.map((video) => {
 			return (
 				<VideoCard
-					key={item.id.videoId}
-					id={item.id.videoId}
-					text={item.snippet.description}
-					pic={item.snippet.thumbnails.medium.url}
-					title={item.snippet.title}
+					key={video.id.videoId}
+					id={video.id.videoId}
+					text={video.snippet.description}
+					pic={video.snippet.thumbnails.medium.url}
+					title={video.snippet.title}
 					className="m-5"
 					handleOpenModal={handleOpenModal}
 				/>

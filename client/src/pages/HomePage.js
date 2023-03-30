@@ -4,6 +4,7 @@ import VideoListPage from "./VideoListPage";
 
 const HomePage = () => {
 	const [userInput, setUserInput] = useState("");
+
 	const searchTerm = `travel place ${userInput}`;
 
 	const onTermSubmit = (term) => {
