@@ -5,8 +5,8 @@ import HomePage from './pages/HomePage';
 import About from './pages/About';
 import FavList from './pages/FavList';
 import Error from './pages/Error';
-import LoginPage from './pages/LoginPage';
-import SignupPage from './pages/SignupPage';
+import LoginPage from './pages/auth/LoginPage';
+import SignupPage from './pages/auth/SignupPage';
 
 const App = () => {
 	return (

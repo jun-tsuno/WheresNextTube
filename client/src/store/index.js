@@ -1,12 +1,12 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { setupListeners } from "@reduxjs/toolkit/dist/query";
-import { videoSearchApi } from "./apis/videoSearch";
+import { configureStore } from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/dist/query';
+import { videoSearchApi } from './apis/videoSearch';
 import {
 	videosReducer,
 	selectVideo,
 	addFavList,
 	removeFavList,
-} from "./slices/videosSlice";
+} from './slices/videosSlice';
 
 const store = configureStore({
 	reducer: {
@@ -22,4 +22,4 @@ setupListeners(store.dispatch);
 
 export { store, selectVideo, addFavList, removeFavList };
 
-export { useGetVideoListsQuery } from "./apis/videoSearch";
+export { useGetVideoListsQuery } from './apis/videoSearch';

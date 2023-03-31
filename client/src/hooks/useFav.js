@@ -1,5 +1,5 @@
-import { useSelector, useDispatch } from "react-redux";
-import { addFavList, removeFavList } from "../store";
+import { useSelector, useDispatch } from 'react-redux';
+import { addFavList, removeFavList } from '../store';
 
 const useFav = () => {
 	const dispatch = useDispatch();

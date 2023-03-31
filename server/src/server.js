@@ -3,14 +3,16 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const favListRoutes = require('./routes/favListRoute');
+const favListRouters = require('./routes/favListRoute');
+const authRouters = require('./routes/authRote');
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.use('/api/favorite', favListRoutes);
+app.use('/api/auth', authRouters);
+app.use('/api/favorite', favListRouters);
 
 mongoose
 	.connect(process.env.MONGODB_URI)
