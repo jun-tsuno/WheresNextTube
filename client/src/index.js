@@ -6,15 +6,18 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { AuthContextProvider } from './context/AuthContext';
+import { BrowserRouter } from 'react-router-dom';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
-	<Provider store={store}>
-		<AuthContextProvider>
-			<ChakraProvider>
-				<App />
-			</ChakraProvider>
-		</AuthContextProvider>
-	</Provider>
+	<BrowserRouter>
+		<Provider store={store}>
+			<AuthContextProvider>
+				<ChakraProvider>
+					<App />
+				</ChakraProvider>
+			</AuthContextProvider>
+		</Provider>
+	</BrowserRouter>
 );
