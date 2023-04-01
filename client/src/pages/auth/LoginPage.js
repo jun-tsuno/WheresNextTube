@@ -2,10 +2,12 @@ import { useState } from 'react';
 import FormInput from '../../components/FormInput';
 import CustomButton from '../../components/CustomButton';
 import { Link } from 'react-router-dom';
+import { useAuthContext } from '../../context/AuthContext';
 
 const LoginPage = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const { login } = useAuthContext();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -14,7 +16,7 @@ const LoginPage = () => {
 			return alert('Both fields are required!!');
 		}
 
-		console.log({ email, password });
+		login({ email, password });
 	};
 	return (
 		<>

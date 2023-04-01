@@ -3,23 +3,34 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 
 const generateToken = (email) => {
+	// decode email
 	return jwt.sign({ email }, process.env.JWT_SECRET_KEY, {
 		expiresIn: process.env.JWT_EXPIRES_IN,
 	});
 };
 
+const generateRefreshToken = (email) => {
+	return jwt.sign({ email }, process.env.REFRESH_TOKEN_SECRET_KEY, {
+		expiresIn: process.env.REFRESH_TOKEN_EXPIRES_IN,
+	});
+};
+
 const signup = async (req, res) => {
-	const { email, password } = req.body;
+	const { name, email, password } = req.body;
 	const salt = await bcrypt.genSalt();
 	const passwordHash = await bcrypt.hash(password, salt);
 	const user = await User.create({
+		name,
 		email,
 		password: passwordHash,
 	});
 
 	const token = generateToken(user.email);
+	const refresh_token = generateRefreshToken(user.email);
 
-	return res.status(201).json({ message: 'User created', token });
+	return res
+		.status(201)
+		.json({ message: 'User created', token, refresh_token });
 };
 
 const login = async (req, res) => {
@@ -36,8 +47,11 @@ const login = async (req, res) => {
 	}
 
 	const token = generateToken(user.email);
+	const refresh_token = generateRefreshToken(user.email);
 
-	return res.status(200).json({ message: 'Login Success', token });
+	return res
+		.status(200)
+		.json({ message: 'Login Success', token, refresh_token });
 };
 
 const getUser = async (_req, res) => {
@@ -50,4 +64,19 @@ const getUser = async (_req, res) => {
 	return res.status(200).json({ user });
 };
 
-module.exports = { signup, login, getUser };
+const refreshToken = async (req, res) => {
+	const { refresh_token } = req.body;
+
+	jwt.verify(refresh_token, REFRESH_TOKEN_SECRET_KEY, (err, decoded) => {
+		if (err) {
+			return res.status(401).json({ message: 'Not a valid token' });
+		} else {
+			const email = decoded.email;
+			const token = generateToken(email);
+
+			return res.status(200).json({ message: 'Issued new token', token });
+		}
+	});
+};
+
+module.exports = { signup, login, getUser, refreshToken };

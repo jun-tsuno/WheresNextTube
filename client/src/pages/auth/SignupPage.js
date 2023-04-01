@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../context/AuthContext';
 
 const SignupPage = () => {
+	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const { signup } = useAuthContext();
@@ -12,11 +13,11 @@ const SignupPage = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		if (!email || !password) {
+		if (!name || !email || !password) {
 			return alert('Both fields are required!!');
 		}
 
-		signup({ email, password });
+		signup({ name, email, password });
 	};
 	return (
 		<>
@@ -26,6 +27,15 @@ const SignupPage = () => {
 						SignUP
 					</h2>
 					<form className='mx-auto space-y-5' onSubmit={handleSubmit}>
+						<div>
+							<FormInput
+								id='name'
+								type='text'
+								title='Nick Name'
+								value={name}
+								onChange={(e) => setName(e.target.value)}
+							/>
+						</div>
 						<div>
 							<FormInput
 								id='email'

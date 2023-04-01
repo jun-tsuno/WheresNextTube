@@ -17,6 +17,12 @@ const HoverLink = (props) => (
 	/>
 );
 
+const links = [
+	{ to: '/', title: 'Home' },
+	{ to: '/howtouse', title: 'How to Use' },
+	{ to: '/favlist', title: 'Favorite List' },
+];
+
 const NavigationLinks = () => {
 	return (
 		<>
@@ -29,30 +35,17 @@ const NavigationLinks = () => {
 				</div>
 			</Heading>
 			<Stack as='b' color='white' fontSize='lg' textAlign='center'>
-				<HoverLink
-					to='/'
-					style={({ isActive }) => (isActive ? activeStyle : undefined)}
-				>
-					Home
-				</HoverLink>
-				<HoverLink
-					to='/login'
-					style={({ isActive }) => (isActive ? activeStyle : undefined)}
-				>
-					Login / SignUp
-				</HoverLink>
-				<HoverLink
-					to='/howtouse'
-					style={({ isActive }) => (isActive ? activeStyle : undefined)}
-				>
-					How to Use
-				</HoverLink>
-				<HoverLink
-					to='/favlist'
-					style={({ isActive }) => (isActive ? activeStyle : undefined)}
-				>
-					Favorite List
-				</HoverLink>
+				{links.map((link) => {
+					return (
+						<HoverLink
+							key={link.title}
+							to={link.to}
+							style={({ isActive }) => (isActive ? activeStyle : undefined)}
+						>
+							{link.title}
+						</HoverLink>
+					);
+				})}
 			</Stack>
 		</>
 	);
