@@ -6,6 +6,7 @@ import {
 	selectVideo,
 	addFavList,
 	removeFavList,
+	resetFavList,
 } from './slices/videosSlice';
 
 const store = configureStore({
@@ -20,6 +21,6 @@ const store = configureStore({
 
 setupListeners(store.dispatch);
 
-export { store, selectVideo, addFavList, removeFavList };
+export { store, selectVideo, addFavList, removeFavList, resetFavList };
 
 export { useGetVideoListsQuery } from './apis/videoSearch';

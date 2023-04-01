@@ -3,17 +3,17 @@ const { ObjectId } = require('mongodb');
 
 //  Get all fav list
 const getFavLists = async (req, res) => {
-	const dummyD = await FavList.find({});
+	const videos = await FavList.find({ userId: req.body.userId });
 
-	return res.status(200).json(dummyD);
+	return res.status(200).json(videos);
 };
 
 // Add to fav list
 const addFavList = async (req, res) => {
-	const { videoId, text, pic, title } = req.body;
+	const { videoId, text, pic, title, userId } = req.body;
 
 	try {
-		const video = await FavList.create({ videoId, text, pic, title });
+		const video = await FavList.create({ videoId, text, pic, title, userId });
 		res.status(200).json(video);
 	} catch (error) {
 		res.status(400).json({ message: error.message });
@@ -24,12 +24,8 @@ const addFavList = async (req, res) => {
 const removeFav = async (req, res) => {
 	const { id } = req.params;
 
-	if (!ObjectId.isValid(id)) {
-		return res.status(500).json({ message: 'Not a valid id' });
-	}
-
 	try {
-		const video = await FavList.findOneAndDelete({ _id: id });
+		const video = await FavList.findOneAndDelete({ videoId: id });
 
 		if (!video) {
 			return res.status(404).json({ message: 'No such favorite video' });

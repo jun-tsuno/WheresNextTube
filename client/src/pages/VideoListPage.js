@@ -1,10 +1,10 @@
-import React from "react";
-import VideoCard from "../components/VideoCard";
-import ModalPage from "./ModalPage";
-import Spinner from "../components/Spinner";
-import Error from "./Error";
-import useModal from "../hooks/useModal";
-import { useGetVideoListsQuery } from "../store";
+import React from 'react';
+import VideoCard from '../components/VideoCard';
+import ModalPage from './ModalPage';
+import Spinner from '../components/Spinner';
+import Error from './Error';
+import useModal from '../hooks/useModal';
+import { useGetVideoListsQuery } from '../store';
 
 const VideoListPage = ({ searchTerm, setSearchTerm }) => {
 	const { data, isError, isFetching } = useGetVideoListsQuery(searchTerm);
@@ -21,11 +21,11 @@ const VideoListPage = ({ searchTerm, setSearchTerm }) => {
 			return (
 				<VideoCard
 					key={video.id.videoId}
-					id={video.id.videoId}
+					videoId={video.id.videoId}
 					text={video.snippet.description}
 					pic={video.snippet.thumbnails.medium.url}
 					title={video.snippet.title}
-					className="m-5"
+					className='m-5'
 					handleOpenModal={handleOpenModal}
 				/>
 			);
@@ -38,7 +38,7 @@ const VideoListPage = ({ searchTerm, setSearchTerm }) => {
 
 	return (
 		<>
-			<div className="flex flex-wrap justify-center">
+			<div className='flex flex-wrap justify-center'>
 				{showContent}
 				{isOpen && modal}
 			</div>

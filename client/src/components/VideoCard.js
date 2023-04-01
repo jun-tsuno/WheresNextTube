@@ -1,8 +1,5 @@
-import React from "react";
-import AddListButton from "./AddListButton";
-import getButtonIcon from "../helpers/getButtonIcon";
-import useFav from "../hooks/useFav";
-import useVideoSelect from "../hooks/useVideoSelect";
+import AddFavButton from './AddFavButton';
+import useVideoSelect from '../hooks/useVideoSelect';
 import {
 	Card,
 	CardBody,
@@ -11,13 +8,19 @@ import {
 	Image,
 	Text,
 	CardFooter,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
-const VideoCard = ({ id, text, pic, title, className, handleOpenModal }) => {
-	const { favId, handleFav } = useFav();
+const VideoCard = ({
+	videoId,
+	text,
+	pic,
+	title,
+	className,
+	handleOpenModal,
+}) => {
 	const handleSelect = useVideoSelect();
 	const videoInfo = {
-		id,
+		videoId,
 		text,
 		pic,
 		title,
@@ -25,29 +28,26 @@ const VideoCard = ({ id, text, pic, title, className, handleOpenModal }) => {
 
 	return (
 		<>
-			<Card w="300px" bg="white" className={className}>
+			<Card w='300px' bg='white' className={className}>
 				<CardBody>
 					<Image
 						src={pic}
-						alt="Thumbnail"
-						borderRadius="lg"
-						cursor="pointer"
-						_hover={{ filter: "auto", brightness: "75%" }}
+						alt='Thumbnail'
+						borderRadius='lg'
+						cursor='pointer'
+						_hover={{ filter: 'auto', brightness: '75%' }}
 						onClick={() => {
 							handleOpenModal();
 							handleSelect(videoInfo);
 						}}
 					/>
-					<Stack mt="6" spacing="3">
-						<Heading size="md">{title}</Heading>
+					<Stack mt='6' spacing='3'>
+						<Heading size='md'>{title}</Heading>
 						<Text>{text}</Text>
 					</Stack>
 				</CardBody>
-				<CardFooter ml="auto">
-					<AddListButton
-						onClick={() => handleFav(videoInfo)}
-						buttonIcon={getButtonIcon(favId, id)}
-					/>
+				<CardFooter ml='auto'>
+					<AddFavButton videoInfo={videoInfo} videoId={videoId} />
 				</CardFooter>
 			</Card>
 		</>

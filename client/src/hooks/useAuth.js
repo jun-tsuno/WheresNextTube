@@ -1,10 +1,12 @@
 import { useState, useCallback } from 'react';
 import axios from '../config/axios';
 import { useNavigate } from 'react-router-dom';
+import useFav from './useFav';
 
 const useAuth = () => {
 	const [user, setUser] = useState();
 	const navigate = useNavigate();
+	const { resetAllFav } = useFav();
 
 	const signup = async (data) => {
 		try {
@@ -46,9 +48,10 @@ const useAuth = () => {
 		axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 		setUser(null);
+		resetAllFav();
 		localStorage.removeItem('token');
 		navigate('/');
-	}, [navigate]);
+	}, [navigate, resetAllFav]);
 
 	const getUser = useCallback(async () => {
 		try {

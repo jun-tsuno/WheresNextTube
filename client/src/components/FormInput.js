@@ -1,14 +1,14 @@
 import React from 'react';
 
 const FormInput = (props) => {
-	const { id, title, type, value, ...rest } = props;
+	const { videoId, title, type, value, ...rest } = props;
 	return (
 		<>
-			<label htmlFor={id} className='text-lg text-gray-600 font-semibold'>
+			<label htmlFor={videoId} className='text-lg text-gray-600 font-semibold'>
 				{title}
 			</label>
 			<input
-				id={id}
+				id={videoId}
 				type={type}
 				value={value}
 				autoComplete='off'
