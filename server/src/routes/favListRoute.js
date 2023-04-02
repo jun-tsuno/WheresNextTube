@@ -8,7 +8,7 @@ const {
 const router = express.Router();
 
 // Get All favorite videos
-router.get('/', getFavLists);
+router.post('/', getFavLists);
 
 // Add to favorite list
 router.post('/', addFavList);

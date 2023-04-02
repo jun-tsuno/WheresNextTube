@@ -3,6 +3,7 @@ import FormInput from '../../components/FormInput';
 import CustomButton from '../../components/CustomButton';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../context/AuthContext';
+import { FaUserCircle } from 'react-icons/fa';
 
 const LoginPage = () => {
 	const [email, setEmail] = useState('');
@@ -21,7 +22,10 @@ const LoginPage = () => {
 	return (
 		<>
 			<div className='w-[80%]'>
-				<div className='absolute left-1/2 translate-y-1/3 -translate-x-1/2 mx-auto w-[80%] max-w-[400px] md:-translate-x-1/3 bg-gray-200 shadow-lg py-14 px-5 rounded-lg'>
+				<div className='absolute left-1/2 translate-y-1/4 -translate-x-1/2 mx-auto w-[80%] max-w-[400px] md:-translate-x-1/3 bg-slate-200 shadow-lg pt-7 pb-14 px-5 rounded-lg'>
+					<span className='flex justify-center text-5xl text-gray-600 pb-3'>
+						<FaUserCircle />
+					</span>
 					<h2 className='text-2xl font-bold text-gray-700 text-center pb-8'>
 						Login
 					</h2>

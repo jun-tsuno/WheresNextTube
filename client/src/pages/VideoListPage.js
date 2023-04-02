@@ -7,12 +7,12 @@ import useModal from '../hooks/useModal';
 import { useGetVideoListsQuery } from '../store';
 
 const VideoListPage = ({ searchTerm, setSearchTerm }) => {
-	const { data, isError, isFetching } = useGetVideoListsQuery(searchTerm);
+	const { data, error, isFetching } = useGetVideoListsQuery(searchTerm);
 	const { isOpen, handleOpenModal, handleCloseModal } = useModal();
 
 	let showContent;
-	if (isError) {
-		showContent = <Error />;
+	if (error) {
+		showContent = <Error message={error.data.error.message} />;
 	} else if (isFetching) {
 		showContent = <Spinner />;
 	} else {

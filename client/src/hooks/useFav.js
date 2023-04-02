@@ -9,6 +9,17 @@ const useFav = () => {
 	});
 	const favId = favList.map((e) => e.videoId);
 
+	const getUserFav = async (userId) => {
+		const response = await axios.post('/favorite', { userId });
+
+		const favVideos = response.data;
+
+		if (favVideos.length === 0) return;
+		favVideos.forEach((favVideo) => {
+			return dispatch(addFavList(favVideo));
+		});
+	};
+
 	const handleFav = async (videoInfo, userId) => {
 		if (favId.includes(videoInfo.videoId)) {
 			const response = await axios.delete(`/favorite/${videoInfo.videoId}`);
@@ -32,7 +43,7 @@ const useFav = () => {
 		dispatch(resetFavList());
 	};
 
-	return { favId, handleFav, resetAllFav };
+	return { favId, handleFav, resetAllFav, getUserFav };
 };
 
 export default useFav;

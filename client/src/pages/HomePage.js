@@ -19,7 +19,8 @@ const HomePage = () => {
 				<div className='flex flex-col'>
 					{user && (
 						<div className='absolute top-[20%] right-[10%] font-semibold'>
-							Welcome Back👋: {user.name}
+							Welcome Back👋:{' '}
+							<span className='font-semibold text-xl'>{user.name}</span>
 						</div>
 					)}
 					<div className='w-[80vw] mx-auto'>

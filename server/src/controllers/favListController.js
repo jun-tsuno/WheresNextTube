@@ -1,10 +1,9 @@
 const FavList = require('../models/favListModel');
 const { ObjectId } = require('mongodb');
 
-//  Get all fav list
+//  Get all fav list by userId
 const getFavLists = async (req, res) => {
 	const videos = await FavList.find({ userId: req.body.userId });
-
 	return res.status(200).json(videos);
 };
 
