@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import FormInput from '../../components/FormInput';
 import CustomButton from '../../components/CustomButton';
 import { Link } from 'react-router-dom';
@@ -8,13 +8,18 @@ import { FaUserCircle } from 'react-icons/fa';
 const LoginPage = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const { login } = useAuthContext();
+	const [errMessage, setErrMessage] = useState('');
+	const { login, authErr, setAuthErr } = useAuthContext();
+
+	useEffect(() => {
+		setAuthErr('');
+	}, []);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
 		if (!email || !password) {
-			return alert('Both fields are required!!');
+			return setErrMessage('Both fields are required!');
 		}
 
 		login({ email, password });
@@ -60,6 +65,16 @@ const LoginPage = () => {
 								SignUp here
 							</Link>
 						</p>
+						{errMessage && (
+							<p className='text-center font-bold text-red-500'>
+								** {errMessage} **
+							</p>
+						)}
+						{authErr && (
+							<p className='text-center font-bold text-red-500'>
+								** {authErr} **
+							</p>
+						)}
 					</form>
 				</div>
 			</div>

@@ -17,6 +17,13 @@ const generateRefreshToken = (email) => {
 
 const signup = async (req, res) => {
 	const { name, email, password } = req.body;
+	const isUserExist = await User.findOne({ email });
+	if (isUserExist) {
+		return res
+			.status(400)
+			.json({ message: 'User already exist with this email!' });
+	}
+
 	const salt = await bcrypt.genSalt();
 	const passwordHash = await bcrypt.hash(password, salt);
 	const user = await User.create({

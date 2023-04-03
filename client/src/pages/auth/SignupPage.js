@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import FormInput from '../../components/FormInput';
 import CustomButton from '../../components/CustomButton';
 import { Link } from 'react-router-dom';
@@ -9,13 +9,18 @@ const SignupPage = () => {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const { signup } = useAuthContext();
+	const [errMessage, setErrMessage] = useState('');
+	const { signup, authErr, setAuthErr } = useAuthContext();
+
+	useEffect(() => {
+		setAuthErr('');
+	}, []);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
 		if (!name || !email || !password) {
-			return alert('Both fields are required!!');
+			return setErrMessage('All fields are required!!');
 		}
 
 		signup({ name, email, password });
@@ -70,6 +75,16 @@ const SignupPage = () => {
 								Login
 							</Link>
 						</p>
+						{errMessage && (
+							<p className='text-center font-bold text-red-500'>
+								** {errMessage} **
+							</p>
+						)}
+						{authErr && (
+							<p className='text-center font-bold text-red-500'>
+								** {authErr} **
+							</p>
+						)}
 					</form>
 				</div>
 			</div>
