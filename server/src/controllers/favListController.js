@@ -1,5 +1,4 @@
 const FavList = require('../models/favListModel');
-const { ObjectId } = require('mongodb');
 
 //  Get all fav list by userId
 const getFavLists = async (req, res) => {
@@ -10,12 +9,11 @@ const getFavLists = async (req, res) => {
 // Add to fav list
 const addFavList = async (req, res) => {
 	const { videoId, text, pic, title, userId } = req.body;
-
 	try {
 		const video = await FavList.create({ videoId, text, pic, title, userId });
-		res.status(200).json(video);
+		return res.status(200).json(video);
 	} catch (error) {
-		res.status(400).json({ message: error.message });
+		return res.status(400).json({ message: error.message });
 	}
 };
 

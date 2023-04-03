@@ -27,11 +27,11 @@ const useFav = () => {
 			dispatch(removeFavList(video.videoId));
 		} else {
 			try {
-				const response = await axios.post('/favorite', {
+				const response = await axios.put('/favorite', {
 					...videoInfo,
-					userId,
+					userId: userId,
 				});
-				const video = response.data;
+				const video = await response.data;
 				dispatch(addFavList(video));
 			} catch (error) {
 				console.log(error.message);

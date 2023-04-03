@@ -11,7 +11,7 @@ const router = express.Router();
 router.post('/', getFavLists);
 
 // Add to favorite list
-router.post('/', addFavList);
+router.put('/', addFavList);
 
 // Remove from favorite list
 router.delete('/:id', removeFav);

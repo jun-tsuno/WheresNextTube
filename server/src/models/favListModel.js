@@ -14,15 +14,15 @@ const favListSchema = new Schema(
 		},
 		text: {
 			type: String,
-			required: true,
+			required: false,
 		},
 		pic: {
 			type: String,
-			required: true,
+			required: false,
 		},
 		title: {
 			type: String,
-			required: true,
+			required: false,
 		},
 	},
 	{ timestamps: true }
