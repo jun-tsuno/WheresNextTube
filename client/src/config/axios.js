@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:4000/api';
+axios.defaults.baseURL =
+	`${process.env.PORT}/api` || 'http://localhost:4000/api';
 
 axios.interceptors.response.use(
 	(response) => response,
