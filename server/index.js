@@ -7,12 +7,14 @@ const favListRouters = require('./src/routes/favListRoute');
 const authRouters = require('./src/routes/authRote');
 
 const app = express();
+app.use(
+	cors({
+		origin: 'https://wheres-next-tube-front.vercel.app/',
+		credentials: true,
+		optionsSuccessStatus: 200,
+	})
+);
 
-app.use((req, res, next) => {
-	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-	next();
-});
 app.use(express.json());
 
 app.use('/api/auth', authRouters);
