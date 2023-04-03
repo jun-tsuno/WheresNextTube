@@ -5,6 +5,7 @@ import useFav from './useFav';
 
 const useAuth = () => {
 	const [user, setUser] = useState();
+	const [authErr, setAuthErr] = useState('');
 	const navigate = useNavigate();
 	const { resetAllFav } = useFav();
 
@@ -22,7 +23,7 @@ const useAuth = () => {
 			await getUser();
 			navigate('/');
 		} catch (error) {
-			console.log(error);
+			setAuthErr(error.response.data.message);
 		}
 	};
 
@@ -39,7 +40,7 @@ const useAuth = () => {
 			await getUser();
 			navigate('/');
 		} catch (error) {
-			console.log(error);
+			setAuthErr(error.response.data.message);
 		}
 	};
 
@@ -63,7 +64,7 @@ const useAuth = () => {
 		}
 	}, [logout]);
 
-	return { user, setUser, signup, login, logout, getUser };
+	return { user, authErr, setAuthErr, setUser, signup, login, logout, getUser };
 };
 
 export default useAuth;

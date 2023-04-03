@@ -6,7 +6,8 @@ import axios from '../config/axios';
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-	const { user, setUser, signup, login, logout, getUser } = useAuth();
+	const { user, authErr, setAuthErr, setUser, signup, login, logout, getUser } =
+		useAuth();
 	const { getUserFav } = useFav();
 
 	useEffect(() => {
@@ -28,7 +29,9 @@ export const AuthContextProvider = ({ children }) => {
 	}, [user]);
 
 	return (
-		<AuthContext.Provider value={{ user, setUser, signup, login, logout }}>
+		<AuthContext.Provider
+			value={{ user, authErr, setAuthErr, setUser, signup, login, logout }}
+		>
 			{children}
 		</AuthContext.Provider>
 	);
