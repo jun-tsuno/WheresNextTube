@@ -5,7 +5,8 @@ The API info >> [YouTube Data API](https://developers.google.com/youtube/v3)
 
 ## Project Overview
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/n7vRMjMoJgw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+Demo Video >> https://youtu.be/n7vRMjMoJgw
+<img width="600" alt="Screenshot 2023-04-02 at 9 26 46 PM" src="https://user-images.githubusercontent.com/110567844/229411542-cad73ff9-6e73-4086-8dd5-9b7f76d699c6.png">
 
 ## Features
 
