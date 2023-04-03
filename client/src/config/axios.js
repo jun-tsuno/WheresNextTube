@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL =
-	`${process.env.PORT}/api` || 'http://localhost:4000/api';
+axios.defaults.baseURL = 'https://wheres-next-tube.vercel.app/api';
 
 axios.interceptors.response.use(
 	(response) => response,
