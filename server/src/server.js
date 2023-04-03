@@ -21,7 +21,7 @@ app.use('/api/favorite', favListRouters);
 mongoose
 	.connect(process.env.MONGODB_URI)
 	.then(() => {
-		app.listen(process.env.PORT, () => {
+		app.listen(process.env.PORT || 4000, () => {
 			console.log(`listening on port ${process.env.PORT}`);
 		});
 	})
