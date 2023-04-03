@@ -9,7 +9,7 @@ const authRouters = require('./src/routes/authRote');
 const app = express();
 app.use(
 	cors({
-		origin: 'https://wheres-next-tube-front.vercel.app/',
+		origin: 'https://wheres-next-tube-front.vercel.app',
 		credentials: true,
 		optionsSuccessStatus: 200,
 	})
