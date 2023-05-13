@@ -11,7 +11,6 @@ const {
 router.post('/signup', signup);
 router.post('/login', login);
 
-// get login user
 router.get('/user', verifyToken, getUser);
 
 router.post('/refresh_token', refreshToken);
